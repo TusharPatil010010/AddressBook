@@ -1,14 +1,12 @@
 import java.util.*;
 
 public class AddressBook {
-
 	public List <person> personList;
 	public AddressBook() {
 		personList = new ArrayList<person>();
 	}
 	
 	public void displayAllContacts() {
-
 		System.out.println("DISPLAYING ALL CONTACT DETAILS FROM ADDRESS BOOK");
 		for(int i = 0; i < personList.size(); i++) {
 			System.out.println(personList.get(i));
@@ -61,7 +59,6 @@ public class AddressBook {
 	}
 	
 	public void editPersonDetails() {
-
 		String FirstName;
 		String LastName;
 		String address;
@@ -101,7 +98,6 @@ public class AddressBook {
 	}
 	
 	public void deletePersonDetails() {
-
 		Scanner sc = new Scanner(System.in);
 		String FirstName;
 		String LastName;
@@ -121,7 +117,6 @@ public class AddressBook {
 	
 	
 	public static void main(String[] args) {
-
 		System.out.println("WELCOME TO ADDRESS BOOK");
 		
 		AddressBook address_book_main = new AddressBook();
