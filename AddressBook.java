@@ -20,24 +20,25 @@ public class AddressBook{
 		
 		AddressBookMain addBookMain = new AddressBookMain();
 		
-		int v;
+		int option;
 		while(true) {
-			System.out.println("1.to create addbook");
-			System.out.println("2.to add person");
-			System.out.println("3.to edit contact");
-			System.out.println("4.to delete contact");
-			System.out.println("5.to view addbook");
-			System.out.println("6.exit");
-			v = sc.nextInt();
+			System.out.println("Press the given number to perform the operation");
+			System.out.println("1. Create addbook");
+			System.out.println("2. Add person");
+			System.out.println("3. Edit contact");
+			System.out.println("4. Delete contact");
+			System.out.println("5. View Addressbook");
+			System.out.println("6. Exit");
+			option = sc.nextInt();
 			sc.nextLine();
-			switch(v) {
+			switch(option) {
 				case 1:
-					System.out.println("Enter the city name to create addressBook");
+					System.out.println("Enter name of the city to create addressBook");
 					String City = sc.nextLine();
 					addBookMain.addAddressBook(City);
 					break;
 				case 2:  
-					System.out.println("Enter the details of person");
+					System.out.println("Enter the person details");
 					System.out.println("Enter the first name");
 					String first_name = sc.nextLine();
 					System.out.println("Enter the last name");
@@ -55,14 +56,14 @@ public class AddressBook{
 					sc.nextLine();
 					System.out.println("Enter the email");
 					String email = sc.nextLine();
-					Contact = new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email);
+					Contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 					
-					for (Map.Entry<String,AddressBook> entry : addressBookMap.entrySet()) {   
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city)) {
 							entry.getValue().addContact(c);
 						}
 						else {
-							System.out.println("The addressbook does not exist, please create addressbook for that city");
+							System.out.println("For this city Address Book does not exist");
 						}
 					}
 					break;
@@ -71,26 +72,26 @@ public class AddressBook{
 					String x = sc.nextLine();
 					System.out.println("Enter the city");
 					String city2 = sc.nextLine();
-					for (Map.Entry<String,AddressBook> entry : addressBookMap.entrySet()) {   
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city2)) {
 							entry.getValue().editContact(x);
 						}
 					}
 					break;
 				case 4:
-					System.out.println("Enter the name to delete");
+					System.out.println("Enter the name to delete contact");
 					String y = sc.nextLine();
 					System.out.println("Enter the city");
 					String city1 = sc.nextLine();
-					for (Map.Entry<String,AddressBook> entry : addressBookMap.entrySet()) {   
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city1)) {
 							entry.getValue().deleteContact(y);
 						}
 					}
 					break;
 				case 5:
-					for (Map.Entry<String,AddressBook> entry : addressBookMap.entrySet()) {
-						System.out.println("The addressbook for city "+entry.getKey()+" is :");
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
+						System.out.println("The addressbook for city "+ entry.getKey() + " :");
 						entry.getValue().viewList();
 					}
 					break;

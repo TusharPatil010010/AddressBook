@@ -18,15 +18,16 @@ public class NewAddressBook{
 		String x = "";
 		int i = 0;
 		for(Contact c : Book) {
-			x = c.getFirstName() +" "+ c.getLastName();
+			x = c.getFirstName() + " " + c.getLastName();
 			if(name.equals(x)) {
 				while(true) {
-					System.out.println("1.Change the address");
-					System.out.println("2.Change the city");
-					System.out.println("3.Change the state");
-					System.out.println("4.Change the ZIP code");
-					System.out.println("5.Change the phone number");
-					System.out.println("6.Change the Email id");
+					System.out.println("Enter the number to do the changes");
+					System.out.println("1. Address");
+					System.out.println("2. City");
+					System.out.println("3. State");
+					System.out.println("4. ZIP code");
+					System.out.println("5. Phone number");
+					System.out.println("6. Email id");
 					int choice = sc.nextInt();
 					sc.nextLine();
 
@@ -65,7 +66,7 @@ public class NewAddressBook{
 						}
 					}
 				}
-			Book.set(i,c);
+			Book.set(i, c);
 			i++;
 		}
 	}
