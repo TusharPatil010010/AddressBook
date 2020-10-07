@@ -58,7 +58,7 @@ public class AddressBook{
 					String email = sc.nextLine();
 					person = new person(firstName, lastName, address, city, state, zip, phoneNumber, email);
 					
-					for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {   
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city)) {
 							entry.getValue().addPerson(p);
 						}
@@ -72,7 +72,7 @@ public class AddressBook{
 					String x = sc.nextLine();
 					System.out.println("Enter the city");
 					String city2 = sc.nextLine();
-					for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {   
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city2)) {
 							entry.getValue().editPerson(x);
 						}
@@ -83,14 +83,14 @@ public class AddressBook{
 					String y = sc.nextLine();
 					System.out.println("Enter the city");
 					String city1 = sc.nextLine();
-					for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {   
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city1)) {
 							entry.getValue().deletePerson(y);
 						}
 					}
 					break;
 				case 5:
-					for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
 						System.out.println("The addressbook for city "+ entry.getKey() + " :");
 						entry.getValue().viewList();
 					}

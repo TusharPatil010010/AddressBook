@@ -19,6 +19,19 @@ public class person{
 		this.email = email;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+	    boolean result = false;
+	    if(o == this) {
+		return true;
+	    }
+	    person p = (person) o;
+	    if(p.firstName.equals(this.firstName) && p.lastName.equals(this.lastName)) {
+		result = true;
+	    }
+	    return result;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

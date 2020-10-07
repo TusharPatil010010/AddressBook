@@ -11,9 +11,14 @@ public class NewAddressBook{
 	public List<person> getBook(){
 		return Book;
 	}
-	public List<person> addPerson(person p) {
+	public void addPerson(person p) {
+		for(int i = 0; i<Book.size(); i++) {	
+			if(Book.get(i).equals(p)) {
+				System.out.println("The person already exists..");
+				return;
+			}
+		}
 		Book.add(p);
-		return Book;
 	}
 	
 	public void editPerson(String name){
