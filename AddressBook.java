@@ -23,6 +23,7 @@ public class AddressBook{
 			System.out.println(p);
 		}
 	}	
+
 	public void searchPersonByState(String name, String state) {
 		List<person> list = new ArrayList<person>();
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
@@ -34,7 +35,27 @@ public class AddressBook{
 			System.out.println(p);
 		}
 	}
-	
+
+	public void viewDataByCity(String city) {
+		List<Contact> list = new ArrayList<Contact>();
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			list = entry.getValue().getBook().stream().filter(c-> c.getState().equals(city))
+					.collect(Collectors.toList());
+		}
+		for(Contact p : list) {
+			System.out.println(p);
+		}
+	}
+	public void viewDataByState(String state) {
+		List<Contact> list = new ArrayList<Contact>();
+		for(Map.Entry<String ,NewAddressBook> entry : addressBookMap.entrySet()) {
+			list = entry.getValue().getBook().stream().filter(c-> c.getState().equals(state))
+					.collect(Collectors.toList());
+		}
+		for(Contact p : list) {
+			System.out.println(p);
+		}
+	}
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -51,7 +72,9 @@ public class AddressBook{
 			System.out.println("5. View Addressbook");
 			System.out.println("6. Search From City");
 			System.out.println("7. Search From State");
-			System.out.println("8. Exit");
+			System.out.println("8. View data by city");
+			System.out.println("9. View data in state");
+			System.out.println("10. Exit");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -133,8 +156,17 @@ public class AddressBook{
 					addBookMain.searchPersonByCity(personName, stateName);
 					break;
 				case 8:
-					System.exit(0);
+					System.out.println("Enter the city");
+					String cityData = scanner.nextLine();
+					addBookMain.viewDataByCity(cityData);
 					break;
+				case 9:
+					System.out.println("Enter the state");
+					String stateData = scanner.nextLine();
+					addBookMain.viewDataByState(statData);
+					break;
+				case 9:
+					System.exit(0);
 			}
 		}
 	}
