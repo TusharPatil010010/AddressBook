@@ -56,7 +56,24 @@ public class AddressBook{
 			System.out.println(p);
 		}
 	}
-	
+
+	public void countByCity(String city) {
+		long count = 0;
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			count = entry.getValue().getBook().stream().filter(c-> c.getCity().equals(city))
+					.count();
+		}
+		System.out.println("count is "+count);
+	}
+	public void countByState(String state) {
+		long count = 0;
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			count = entry.getValue().getBook().stream().filter(c-> c.getState().equals(state))
+					.count();
+		}
+		System.out.println("count is "+count);
+	}
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
@@ -74,7 +91,9 @@ public class AddressBook{
 			System.out.println("7. Search From State");
 			System.out.println("8. View data by city");
 			System.out.println("9. View data in state");
-			System.out.println("10. Exit");
+			System.out.println("10. Count contact from city");
+			System.out.println("11. Count contact from state");
+			System.out.println("12.exit");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -165,7 +184,17 @@ public class AddressBook{
 					String stateData = scanner.nextLine();
 					addBookMain.viewDataByState(statData);
 					break;
-				case 9:
+				case 10:
+					System.out.println("Enter the city");
+					String cityCount = scanner.nextLine();
+					addBookMain.countByCity(cityCount);
+					break;
+				case 11:
+					System.out.println("Enter the city");
+					String stateCount = scanner.nextLine();
+					addBookMain.countByState(stateCount);
+					break;
+				case 12:
 					System.exit(0);
 			}
 		}
