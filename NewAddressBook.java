@@ -1,24 +1,26 @@
+import java.util.*;
+
 public class NewAddressBook{
 	Scanner sc = new Scanner(System.in);
-	public List<Contact> Book = new ArrayList<Contact>();	
+	public List <person> Book = new ArrayList<person> ();	
 	public String city;
 	
-	public AddressBook(String city) {
+	public NewAddressBook(String city) {
 		this.city = city;
 	}
-	public List<Contact> getBook(){
+	public List<person> getBook(){
 		return Book;
 	}
-	public List<Contact> addContact(Contact c) {
-		Book.add(c);
+	public List<person> addPerson(person p) {
+		Book.add(p);
 		return Book;
 	}
 	
-	public void editContact(String name){
+	public void editPerson(String name){
 		String x = "";
 		int i = 0;
-		for(Contact c : Book) {
-			x = c.getFirstName() + " " + c.getLastName();
+		for(person p : Book) {
+			x = p.getFirstName() + " " + p.getLastName();
 			if(name.equals(x)) {
 				while(true) {
 					System.out.println("Enter the number to do the changes");
@@ -35,46 +37,46 @@ public class NewAddressBook{
 						case 1 : 
 							System.out.println("Enter new address");
 							String address = sc.nextLine();
-							c.setAddress(address);
+							p.setAddress(address);
 							break;
 						case 2 : 
 							System.out.println("Enter new city");
 							String city = sc.nextLine();
-							c.setCity(city);
+							p.setCity(city);
 							break;
 						case 3 : 
 							System.out.println("Enter new state");
 							String state = sc.nextLine();
-							c.setAddress(state);
+							p.setAddress(state);
 							break;
 						case 4 : 
 							System.out.println("Enter new ZIP code");
 				 			String zip = sc.nextLine();
-				 			c.setZip(zip);
+				 			p.setZip(zip);
 				 			break;
 						case 5 : 
 							System.out.println("Enter new phone number");
 				 			long phone = sc.nextLong();
 				 			sc.nextLine();
-				 			c.setPhoneNumber(phone);
+				 			p.setPhoneNumber(phone);
 				 			break;
 						case 6 : 
 							System.out.println("Enter new Email id");
 				 			String email = sc.nextLine();
-				 			c.setEmail(email);
+				 			p.setEmail(email);
 				 			break;
 						}
 					}
 				}
-			Book.set(i, c);
+			Book.set(i, p);
 			i++;
 		}
 	}
 	
-	public void deleteContact(String name){
+	public void deletePerson(String name){
 		String x = "";
-		for(Contact c : Book) {
-			x = c.getFirstName() +" "+c.getLastName();
+		for(person p : Book) {
+			x = p.getFirstName() +" "+p.getLastName();
 			if(name.equals(x)) {
 				Book.remove(c);
 			}
@@ -83,9 +85,9 @@ public class NewAddressBook{
 	
 	public void viewList() {
 		
-		for(Contact c : Book) {
-			System.out.println("First Name : " + c.getFirstName() + "Last Name : " + c.getLastName() + " Address : " + c.getAddress() + " City : " + c.getCity() 
-							+ " State : " + c.getState() + " ZIP : " + c.getZip() + " Phone Number : " + c.getPhoneNumber() + " Email ID : " + c.getEmail() + "\n");
+		for(person p : Book) {
+			System.out.println("First Name : " + p.getFirstName() + "Last Name : " + p.getLastName() + " Address : " + p.getAddress() + " City : " + p.getCity() 
+							+ " State : " + p.getState() + " ZIP : " + p.getZip() + " Phone Number : " + p.getPhoneNumber() + " Email ID : " + p.getEmail() + "\n");
 		}
 	}
 

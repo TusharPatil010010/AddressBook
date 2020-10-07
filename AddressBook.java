@@ -1,24 +1,24 @@
 import java.util.*;
 public class AddressBook{
 	
-	public static Map<String,AddressBook> addressBookMap;
+	public static Map<String, AddressBook> addressBookMap;
 	
-	public AddressBookMain() {
+	public AddressBook() {
 		addressBookMap = new HashMap<>();
 	}
 	
 	public void addAddressBook(String city) {
-		AddressBook addBook = new AddressBook(city);
-		addressBookMap.put(city,addBook);
+		NewAddressBook addBook = new NewAddressBook(city);
+		addressBookMap.put(city, addBook);
 	}
 	
-	public List<Contact> Book = new ArrayList<Contact>();	
+	public List<person> Book = new ArrayList<person>();	
 	
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		AddressBookMain addBookMain = new AddressBookMain();
+		AddressBook addBookMain = new AddressBook();
 		
 		int option;
 		while(true) {
@@ -56,11 +56,11 @@ public class AddressBook{
 					sc.nextLine();
 					System.out.println("Enter the email");
 					String email = sc.nextLine();
-					Contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+					person = new person(firstName, lastName, address, city, state, zip, phoneNumber, email);
 					
 					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city)) {
-							entry.getValue().addContact(c);
+							entry.getValue().addPerson(p);
 						}
 						else {
 							System.out.println("For this city Address Book does not exist");
@@ -74,7 +74,7 @@ public class AddressBook{
 					String city2 = sc.nextLine();
 					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city2)) {
-							entry.getValue().editContact(x);
+							entry.getValue().editPerson(x);
 						}
 					}
 					break;
@@ -85,7 +85,7 @@ public class AddressBook{
 					String city1 = sc.nextLine();
 					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city1)) {
-							entry.getValue().deleteContact(y);
+							entry.getValue().deletePerson(y);
 						}
 					}
 					break;
