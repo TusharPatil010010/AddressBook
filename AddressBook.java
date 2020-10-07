@@ -73,6 +73,13 @@ public class AddressBook{
 		}
 		System.out.println("count is "+count);
 	}
+	
+	public void sortByName() {
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			Collections.sort(entry.getValue().getBook(),new SortByName());
+		}
+
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -93,7 +100,8 @@ public class AddressBook{
 			System.out.println("9. View data in state");
 			System.out.println("10. Count contact from city");
 			System.out.println("11. Count contact from state");
-			System.out.println("12.exit");
+			System.out.println("12. Sort the addressbook by name");
+			System.out.println("13.exit");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -195,6 +203,9 @@ public class AddressBook{
 					addBookMain.countByState(stateCount);
 					break;
 				case 12:
+					addBookMain.sortByName();
+					break;
+				case 13:
 					System.exit(0);
 			}
 		}
