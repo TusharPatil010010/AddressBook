@@ -30,11 +30,10 @@ public class NewAddressBook{
 				while(true) {
 					System.out.println("Enter the number to do the changes");
 					System.out.println("1. Address");
-					System.out.println("2. City");
-					System.out.println("3. State");
-					System.out.println("4. ZIP code");
-					System.out.println("5. Phone number");
-					System.out.println("6. Email id");
+					System.out.println("2. Phone number");
+					System.out.println("3. Email id");
+					System.out.println("4. Exit");
+
 					int choice = sc.nextInt();
 					sc.nextLine();
 
@@ -44,35 +43,32 @@ public class NewAddressBook{
 							String address = sc.nextLine();
 							p.setAddress(address);
 							break;
+
+
+
 						case 2 : 
-							System.out.println("Enter new city");
-							String city = sc.nextLine();
-							p.setCity(city);
-							break;
-						case 3 : 
-							System.out.println("Enter new state");
-							String state = sc.nextLine();
-							p.setAddress(state);
-							break;
-						case 4 : 
-							System.out.println("Enter new ZIP code");
-				 			String zip = sc.nextLine();
-				 			p.setZip(zip);
-				 			break;
-						case 5 : 
 							System.out.println("Enter new phone number");
 				 			long phone = sc.nextLong();
 				 			sc.nextLine();
 				 			p.setPhoneNumber(phone);
 				 			break;
-						case 6 : 
+						case 3 : 
 							System.out.println("Enter new Email id");
 				 			String email = sc.nextLine();
 				 			p.setEmail(email);
 				 			break;
+                                                case 4 :
+							break;
 						}
+						if(choice == 3) {
+						break;
 					}
 				}
+					
+			}
+			else {
+				System.out.println("Enter correct name");
+			}
 			Book.set(i, p);
 			i++;
 		}

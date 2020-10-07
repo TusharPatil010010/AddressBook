@@ -12,7 +12,28 @@ public class AddressBook{
 		addressBookMap.put(city, addBook);
 	}
 	
-	public List<person> Book = new ArrayList<person>();	
+	public void searchPersonByCity(String name, String city) {
+		List<person> list = new ArrayList<person>();
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			list = entry.getValue().getBook().stream().filter(c -> c.getCity().equals(city))
+					.filter(c -> (c.getFirstName() + " " + c.getLastName())
+					.equals(name)).collect(Collectors.toList());
+		}
+		for(person p : list) {
+			System.out.println(p);
+		}
+	}	
+	public void searchPersonByState(String name, String state) {
+		List<person> list = new ArrayList<person>();
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			list = entry.getValue().getBook().stream().filter(c -> c.getState().equals(state))
+					.filter(c -> (c.getFirstName() + " " + c.getLastName())
+					.equals(name)).collect(Collectors.toList());
+		}
+		for(person p : list) {
+			System.out.println(p);
+		}
+	}
 	
 	
 	public static void main(String[] args) {
@@ -28,7 +49,9 @@ public class AddressBook{
 			System.out.println("3. Edit contact");
 			System.out.println("4. Delete contact");
 			System.out.println("5. View Addressbook");
-			System.out.println("6. Exit");
+			System.out.println("6. Search From City");
+			System.out.println("7. Search From State");
+			System.out.println("8. Exit");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -96,6 +119,20 @@ public class AddressBook{
 					}
 					break;
 				case 6:
+					System.out.println("Enter the name to search");
+					String searchName = scanner.nextLine();
+					System.out.println("Enter the city");
+					String cityName = scanner.nextLine();
+					addBookMain.searchPersonByCity(searchName, cityName);
+					break;
+				case 7:
+					System.out.println("Enter the name to search");
+					String personName = scanner.nextLine();
+					System.out.println("Enter the state");
+					String stateName = scanner.nextLine();
+					addBookMain.searchPersonByCity(personName, stateName);
+					break;
+				case 8:
 					System.exit(0);
 					break;
 			}
