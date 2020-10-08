@@ -15,8 +15,8 @@ public class AddressBook{
 	public void searchPersonByCity(String name, String city) {
 		List<person> list = new ArrayList<person>();
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			list = entry.getValue().getBook().stream().filter(c -> c.getCity().equals(city))
-					.filter(c -> (c.getFirstName() + " " + c.getLastName())
+			list = entry.getValue().getBook().stream().filter(p -> p.getCity().equals(city))
+					.filter(p -> (p.getFirstName() + " " + p.getLastName())
 					.equals(name)).collect(Collectors.toList());
 		}
 		for(person p : list) {
@@ -27,8 +27,8 @@ public class AddressBook{
 	public void searchPersonByState(String name, String state) {
 		List<person> list = new ArrayList<person>();
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			list = entry.getValue().getBook().stream().filter(c -> c.getState().equals(state))
-					.filter(c -> (c.getFirstName() + " " + c.getLastName())
+			list = entry.getValue().getBook().stream().filter(p -> p.getState().equals(state))
+					.filter(p -> (p.getFirstName() + " " + p.getLastName())
 					.equals(name)).collect(Collectors.toList());
 		}
 		for(person p : list) {
@@ -39,7 +39,7 @@ public class AddressBook{
 	public void viewDataByCity(String city) {
 		List<Contact> list = new ArrayList<Contact>();
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			list = entry.getValue().getBook().stream().filter(c-> c.getState().equals(city))
+			list = entry.getValue().getBook().stream().filter(p -> p.getState().equals(city))
 					.collect(Collectors.toList());
 		}
 		for(Contact p : list) {
@@ -49,7 +49,7 @@ public class AddressBook{
 	public void viewDataByState(String state) {
 		List<Contact> list = new ArrayList<Contact>();
 		for(Map.Entry<String ,NewAddressBook> entry : addressBookMap.entrySet()) {
-			list = entry.getValue().getBook().stream().filter(c-> c.getState().equals(state))
+			list = entry.getValue().getBook().stream().filter(p -> p.getState().equals(state))
 					.collect(Collectors.toList());
 		}
 		for(Contact p : list) {
@@ -60,7 +60,7 @@ public class AddressBook{
 	public void countByCity(String city) {
 		long count = 0;
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			count = entry.getValue().getBook().stream().filter(c-> c.getCity().equals(city))
+			count = entry.getValue().getBook().stream().filter(p -> p.getCity().equals(city))
 					.count();
 		}
 		System.out.println("count is "+count);
@@ -68,7 +68,7 @@ public class AddressBook{
 	public void countByState(String state) {
 		long count = 0;
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			count = entry.getValue().getBook().stream().filter(c-> c.getState().equals(state))
+			count = entry.getValue().getBook().stream().filter(p -> p.getState().equals(state))
 					.count();
 		}
 		System.out.println("count is "+count);
