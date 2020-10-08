@@ -1,6 +1,6 @@
 import java.util.*;
+
 public class AddressBook{
-	
 	public static Map<String, NewAddressBook> addressBookMap;
 	
 	public AddressBook() {
@@ -48,7 +48,7 @@ public class AddressBook{
 	}
 	public void viewDataByState(String state) {
 		List<Contact> list = new ArrayList<Contact>();
-		for(Map.Entry<String ,NewAddressBook> entry : addressBookMap.entrySet()) {
+		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
 			list = entry.getValue().getBook().stream().filter(p -> p.getState().equals(state))
 					.collect(Collectors.toList());
 		}
@@ -71,19 +71,19 @@ public class AddressBook{
 			count = entry.getValue().getBook().stream().filter(p -> p.getState().equals(state))
 					.count();
 		}
-		System.out.println("count is "+count);
+		System.out.println("count is " + count);
 	}
 	
 	public void sortByName() {
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			Collections.sort(entry.getValue().getBook(),new SortByName());
+			Collections.sort(entry.getValue().getBook(), new SortByName());
 		}
 
 	}
 
 	public void sortByZip() {
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			Collections.sort(entry.getValue().getBook(),new SortByZip());
+			Collections.sort(entry.getValue().getBook(), new SortByZip());
 		}
 	}
 
@@ -213,7 +213,7 @@ public class AddressBook{
 					addBookMain.sortByName();
 					break;
 				case 13:
-					addBookMain.sortByZ();
+					addBookMain.sortByZip();
 					break;
 				case 14:
 					System.exit(0);

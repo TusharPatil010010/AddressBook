@@ -8,9 +8,11 @@ public class NewAddressBook{
 	public NewAddressBook(String city) {
 		this.city = city;
 	}
+
 	public List<person> getBook(){
 		return Book;
 	}
+
 	public void addPerson(person p) {
 		for(int i = 0; i<Book.size(); i++) {	
 			if(Book.get(i).equals(p)) {
@@ -43,9 +45,6 @@ public class NewAddressBook{
 							String address = sc.nextLine();
 							p.setAddress(address);
 							break;
-
-
-
 						case 2 : 
 							System.out.println("Enter new phone number");
 				 			long phone = sc.nextLong();
@@ -63,8 +62,7 @@ public class NewAddressBook{
 						if(choice == 3) {
 						break;
 					}
-				}
-					
+				}	
 			}
 			else {
 				System.out.println("Enter correct name");
@@ -77,9 +75,9 @@ public class NewAddressBook{
 	public void deletePerson(String name){
 		String x = "";
 		for(person p : Book) {
-			x = p.getFirstName() +" "+p.getLastName();
+			x = p.getFirstName() + " " + p.getLastName();
 			if(name.equals(x)) {
-				Book.remove(c);
+				Book.remove(p);
 			}
 		}
 	}
@@ -87,9 +85,7 @@ public class NewAddressBook{
 	public void viewList() {
 		
 		for(person p : Book) {
-			System.out.println("First Name : " + p.getFirstName() + "Last Name : " + p.getLastName() + " Address : " + p.getAddress() + " City : " + p.getCity() 
-							+ " State : " + p.getState() + " ZIP : " + p.getZip() + " Phone Number : " + p.getPhoneNumber() + " Email ID : " + p.getEmail() + "\n");
+			System.out.println("First Name : " + p.getFirstName() + "Last Name : " + p.getLastName() + " Address : " + p.getAddress() + " City : " + 			p.getCity() + " State : " + p.getState() + " ZIP : " + p.getZip() + " Phone Number : " + p.getPhoneNumber() + " Email ID : " + p.getEmail() + "\n");
 		}
 	}
-
 }
