@@ -75,15 +75,26 @@ public class AddressBook{
 	}
 	
 	public void sortByName() {
-		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			Collections.sort(entry.getValue().getBook(), new SortByName());
+		List<Person> personList = new ArrayList<>();
+		for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			personList = entry.getValue().getPersonList().stream()
+					.sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
 		}
-
+		System.out.println("Sorted list by names ");
+		for (Person list : personList) {
+			System.out.println(list.getName());
+		}	
 	}
 
 	public void sortByZip() {
-		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			Collections.sort(entry.getValue().getBook(), new SortByZip());
+		List<Person> personList = new ArrayList<>();
+		for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			personList = entry.getValue().getPersonList().stream()
+					.sorted((p1, p2) -> Integer.compare(p1.getZip(), p2.getZip())).collect(Collectors.toList());
+		}
+		System.out.println("Sorted list by ZIP code ");
+		for (Person list : personList) {
+			System.out.println(list.getZip());
 		}
 	}
 
