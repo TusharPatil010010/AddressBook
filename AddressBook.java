@@ -1,4 +1,11 @@
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
 public class AddressBook{
 	
 	public static Map<String, NewAddressBook> addressBookMap;
@@ -37,22 +44,22 @@ public class AddressBook{
 	}
 
 	public void viewDataByCity(String city) {
-		List<Contact> list = new ArrayList<Contact>();
+		List<person> list = new ArrayList<person>();
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
 			list = entry.getValue().getBook().stream().filter(p -> p.getState().equals(city))
 					.collect(Collectors.toList());
 		}
-		for(Contact p : list) {
+		for(person p : list) {
 			System.out.println(p);
 		}
 	}
 	public void viewDataByState(String state) {
-		List<Contact> list = new ArrayList<Contact>();
+		List<person> list = new ArrayList<person>();
 		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
 			list = entry.getValue().getBook().stream().filter(p -> p.getState().equals(state))
 					.collect(Collectors.toList());
 		}
-		for(Contact p : list) {
+		for(person p : list) {
 			System.out.println(p);
 		}
 	}
@@ -75,15 +82,40 @@ public class AddressBook{
 	}
 	
 	public void sortByName() {
-		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			Collections.sort(entry.getValue().getBook(), new SortByName());
+		List<person> personList = new ArrayList<>();
+		for (Map.Entry<String, AddressBook> entry : StateAddressBookMap.entrySet()) {
+			personList = entry.getValue().getPersonList().stream()
+					.sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
 		}
 
+		System.out.println("Sorted list of names: ");
+		for (Person list : personList) {
+			System.out.println(list.getName());
+		}
 	}
 
 	public void sortByZip() {
-		for(Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			Collections.sort(entry.getValue().getBook(), new SortByZip());
+		List<person> personList = new ArrayList<>();
+		for (Map.Entry<String, AddressBook> entry : StateAddressBookMap.entrySet()) {
+			personList = entry.getValue().getPersonList().stream()
+					.sorted((p1, p2) -> Integer.compare(p1.getZip(), p2.getZip())).collect(Collectors.toList());
+		}
+
+		System.out.println("Sorted list of ZIPs : ");
+		for (Person list : personList) {
+			System.out.println(list.getZip());
+		}
+	}
+
+	public void writeData(IOService ioService) {
+		if (ioService.equals(IOService.FILE_IO)) {
+			new AddressBookService().writeData(addressBookMap);
+		}
+	}
+
+	public void readData(IOService ioService) {
+		if (ioService.equals(IOService.FILE_IO)) {
+			new AddressBookService().readData();
 		}
 	}
 
@@ -108,7 +140,9 @@ public class AddressBook{
 			System.out.println("11. Count contact from state");
 			System.out.println("12. Sort the addressbook by name");
 			System.out.println("13. Sort the addressbook by ZIP");
-			System.out.println("14. exit");
+			System.out.println("14. Writing data to file");
+			System.out.println("15. Reading data from File");
+			System.out.println("16. exit");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -136,7 +170,7 @@ public class AddressBook{
 					sc.nextLine();
 					System.out.println("Enter the email");
 					String email = sc.nextLine();
-					person = new person(firstName, lastName, address, city, state, zip, phoneNumber, email);
+					p = new person(firstName, lastName, address, city, state, zip, phoneNumber, email);
 					
 					for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {   
 						if(entry.getKey().equalsIgnoreCase(city)) {
@@ -177,36 +211,36 @@ public class AddressBook{
 					break;
 				case 6:
 					System.out.println("Enter the name to search");
-					String searchName = scanner.nextLine();
+					String searchName = sc.nextLine();
 					System.out.println("Enter the city");
-					String cityName = scanner.nextLine();
+					String cityName = sc.nextLine();
 					addBookMain.searchPersonByCity(searchName, cityName);
 					break;
 				case 7:
 					System.out.println("Enter the name to search");
-					String personName = scanner.nextLine();
+					String personName = sc.nextLine();
 					System.out.println("Enter the state");
-					String stateName = scanner.nextLine();
+					String stateName = sc.nextLine();
 					addBookMain.searchPersonByCity(personName, stateName);
 					break;
 				case 8:
 					System.out.println("Enter the city");
-					String cityData = scanner.nextLine();
+					String cityData = sc.nextLine();
 					addBookMain.viewDataByCity(cityData);
 					break;
 				case 9:
 					System.out.println("Enter the state");
-					String stateData = scanner.nextLine();
+					String stateData = sc.nextLine();
 					addBookMain.viewDataByState(statData);
 					break;
 				case 10:
 					System.out.println("Enter the city");
-					String cityCount = scanner.nextLine();
+					String cityCount = sc.nextLine();
 					addBookMain.countByCity(cityCount);
 					break;
 				case 11:
 					System.out.println("Enter the city");
-					String stateCount = scanner.nextLine();
+					String stateCount = sc.nextLine();
 					addBookMain.countByState(stateCount);
 					break;
 				case 12:
@@ -216,6 +250,12 @@ public class AddressBook{
 					addBookMain.sortByZip();
 					break;
 				case 14:
+					addBookMain.writeData(IOService.FILE_IO);
+					break;
+				case 15:
+					addBookMain.readData(IOService.FILE_IO);
+					break;
+				case 16:
 					System.exit(0);
 			}
 		}
