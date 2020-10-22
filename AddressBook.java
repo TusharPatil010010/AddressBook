@@ -1,18 +1,23 @@
 import java.util.*;
-<<<<<<< HEAD
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriter;
+import java.util.Collections;
 
 public class AddressBook{
 	
-=======
-
-public class AddressBook {
->>>>>>> 094acac131b23f235a5c85edc6e224ea1fbdc0de
 	public static Map<String, NewAddressBook> addressBookMap;
 	
 	public AddressBook() {
@@ -87,7 +92,6 @@ public class AddressBook {
 	}
 	
 	public void sortByName() {
-<<<<<<< HEAD
 		List<person> personList = new ArrayList<>();
 		for (Map.Entry<String, AddressBook> entry : StateAddressBookMap.entrySet()) {
 			personList = entry.getValue().getPersonList().stream()
@@ -122,30 +126,43 @@ public class AddressBook {
 	public void readData(IOService ioService) {
 		if (ioService.equals(IOService.FILE_IO)) {
 			new AddressBookService().readData();
-=======
-		List<Person> personList = new ArrayList<>();
-		for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			personList = entry.getValue().getPersonList().stream()
-					.sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
 		}
-		System.out.println("Sorted list by names ");
-		for (Person list : personList) {
-			System.out.println(list.getName());
-		}	
 	}
 
-	public void sortByZip() {
-		List<Person> personList = new ArrayList<>();
-		for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
-			personList = entry.getValue().getPersonList().stream()
-					.sorted((p1, p2) -> Integer.compare(p1.getZip(), p2.getZip())).collect(Collectors.toList());
-		}
-		System.out.println("Sorted list by ZIP code ");
-		for (Person list : personList) {
-			System.out.println(list.getZip());
->>>>>>> 094acac131b23f235a5c85edc6e224ea1fbdc0de
-		}
-	}
+	public static void writeContactAsCSV(person contact) 
+	{ 
+		Path path = Paths.get("addressBook.csv");
+		try { 
+			FileWriter outputfile = new FileWriter(path.toFile(), true); 
+			CSVWriter writer = new CSVWriter(outputfile); 
+			//add data to csv
+			String[] data = contact.toString().split(",");
+			writer.writeNext(data);
+			// closing writer connection 
+			writer.close(); 
+		} 
+		catch (IOException exception) { 
+			exception.printStackTrace(); 
+		} 
+	} 
+	public static void readAddressBookCSV() 
+	{ 
+	    try {  
+	        FileReader filereader = new FileReader(Paths.get("addressBook.csv").toFile()); 
+	        CSVReader csvReader = new CSVReaderBuilder(filereader).build();  
+	        List<String[]> contactData = csvReader.readAll(); 
+	        // print Data 
+	        for (String[] row : contactData) { 
+	            for (String cell : row) { 
+	                System.out.print(cell + "\t"); 
+	            } 
+	            System.out.println(); 
+	        } 
+	    } 
+	    catch (Exception exception) { 
+	        exception.printStackTrace(); 
+	    } 
+	} 
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -170,7 +187,9 @@ public class AddressBook {
 			System.out.println("13. Sort the addressbook by ZIP");
 			System.out.println("14. Writing data to file");
 			System.out.println("15. Reading data from File");
-			System.out.println("16. exit");
+			System.out.println("16. Writing data to CSVFile");
+			System.out.println("17. Reading data from CSVFile");
+			System.out.println("18. exit");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -284,6 +303,12 @@ public class AddressBook {
 					addBookMain.readData(IOService.FILE_IO);
 					break;
 				case 16:
+					addBookMain.writeContactAsCSV(person contact);
+					break;
+				case 17:
+					addBookMain.readAddressBookCSV();
+					break;
+				case 18:
 					System.exit(0);
 			}
 		}
