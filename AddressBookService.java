@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class AddressBookService {
-	public static String FILE_NAME = "AddressBook.txt";
-
+	public static String FILE_NAME = "AddressBook.text";
+	
+	//File IO operations
 	public void writeData(Map<String, AddressBook> addressBookMap) {
 		StringBuffer employeeBuffer = new StringBuffer();
 		for(Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
