@@ -1,4 +1,5 @@
 import java.util.*;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,10 @@ import java.util.stream.Collectors;
 
 public class AddressBook{
 	
+=======
+
+public class AddressBook {
+>>>>>>> 094acac131b23f235a5c85edc6e224ea1fbdc0de
 	public static Map<String, NewAddressBook> addressBookMap;
 	
 	public AddressBook() {
@@ -82,6 +87,7 @@ public class AddressBook{
 	}
 	
 	public void sortByName() {
+<<<<<<< HEAD
 		List<person> personList = new ArrayList<>();
 		for (Map.Entry<String, AddressBook> entry : StateAddressBookMap.entrySet()) {
 			personList = entry.getValue().getPersonList().stream()
@@ -116,6 +122,28 @@ public class AddressBook{
 	public void readData(IOService ioService) {
 		if (ioService.equals(IOService.FILE_IO)) {
 			new AddressBookService().readData();
+=======
+		List<Person> personList = new ArrayList<>();
+		for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			personList = entry.getValue().getPersonList().stream()
+					.sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
+		}
+		System.out.println("Sorted list by names ");
+		for (Person list : personList) {
+			System.out.println(list.getName());
+		}	
+	}
+
+	public void sortByZip() {
+		List<Person> personList = new ArrayList<>();
+		for (Map.Entry<String, NewAddressBook> entry : addressBookMap.entrySet()) {
+			personList = entry.getValue().getPersonList().stream()
+					.sorted((p1, p2) -> Integer.compare(p1.getZip(), p2.getZip())).collect(Collectors.toList());
+		}
+		System.out.println("Sorted list by ZIP code ");
+		for (Person list : personList) {
+			System.out.println(list.getZip());
+>>>>>>> 094acac131b23f235a5c85edc6e224ea1fbdc0de
 		}
 	}
 
