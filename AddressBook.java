@@ -164,6 +164,19 @@ public class AddressBook{
 	    } 
 	} 
 
+	public void readDataGSON(IOServices ioService) {
+		if (ioService.equals(IOServices.FILE_IO)) {
+			new AddressBookFileService().readDataGSON();
+		}
+	}
+
+	public void writeDataGSON(IOServices ioService) {
+		if (ioService.equals(IOServices.FILE_IO)) {
+			new AddressBookFileService().writeDataGSON(stateAddressBookMap);
+		}
+
+	}
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
@@ -189,7 +202,8 @@ public class AddressBook{
 			System.out.println("15. Reading data from File");
 			System.out.println("16. Writing data to CSVFile");
 			System.out.println("17. Reading data from CSVFile");
-			System.out.println("18. exit");
+			System.out.println("18. Writing data to JSON file");
+			System.out.println("19. Reading data from JSON File");
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -309,7 +323,14 @@ public class AddressBook{
 					addBookMain.readAddressBookCSV();
 					break;
 				case 18:
-					System.exit(0);
+					addressBookMain.writeDataGSON(IOServices.FILE_IO);
+					break;
+				case 19:
+					addressBookMain.readDataGSON(IOServices.FILE_IO);
+					break;
+				default:
+					System.out.println("Enter correct input");
+					break;
 			}
 		}
 	}

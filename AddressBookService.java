@@ -80,5 +80,42 @@ public class AddressBookService {
 			e.printStackTrace();
 		}
 	}
+	public void writeDataGSON(Map<String, AddressBook> stateAddressBookMap) {
+		try {
+			Gson gson = new Gson();
+			FileWriter writer = new FileWriter(GSON_FILE_NAME);
+			stateAddressBookMap.values().stream().map(entry -> entry.getPersonList())
+					.forEach(listEntry -> listEntry.forEach(person -> {
+						String json = gson.toJson(person);
+						try {
+							writer.write(json);
+						} catch (IOException exception) {
+							exception.printStackTrace();
+						}
+					}));
+			writer.close();
+			System.out.println("Data entered successfully to addressbook.json file.");
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	public void readDataGSON() {
+		Gson gson = new Gson();
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(GSON_FILE_NAME));
+			JsonStreamParser parser = new JsonStreamParser(bufferedReader);
+			while (parser.hasNext()) {
+				JsonElement json = parser.next();
+				if (json.isJsonObject()) {
+					Person person = gson.fromJson(json, Person.class);
+					System.out.println(person);
+				}
+			}
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+}
 
 }
